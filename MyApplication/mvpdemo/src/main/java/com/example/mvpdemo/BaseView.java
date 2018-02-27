@@ -5,4 +5,5 @@ package com.example.mvpdemo;
  */
 
 public interface BaseView {
+    //TODO 一些公共的接口
 }

@@ -8,8 +8,9 @@ import android.support.v7.app.AppCompatActivity;
  * @author xupangen on 2018/2/8.
  */
 
-public abstract class BaseMvpActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
-    protected T presenter;
+public abstract class BaseMvpActivity<V extends  BaseView, P extends BasePresenter<V>>
+        extends AppCompatActivity {
+    protected P presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -20,7 +21,7 @@ public abstract class BaseMvpActivity<V, T extends BasePresenter<V>> extends App
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.attach((V) this,this);
+        presenter.attach(this,(V) this);
     }
 
     @Override
@@ -29,5 +30,5 @@ public abstract class BaseMvpActivity<V, T extends BasePresenter<V>> extends App
         super.onDestroy();
     }
 
-    public abstract T initPresenter();
+    public abstract P initPresenter();
 }
