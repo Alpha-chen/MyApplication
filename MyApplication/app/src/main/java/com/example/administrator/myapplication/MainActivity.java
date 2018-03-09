@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_socket:
-                startActivity(new Intent(MainActivity.this, SocketActivity.class));
+                startActivity(new Intent(MainActivity.this, SocketActivity2.class));
                 break;
             case R.id.btn_network:
                 break;

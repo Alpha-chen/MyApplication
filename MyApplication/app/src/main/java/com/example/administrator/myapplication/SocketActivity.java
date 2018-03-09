@@ -17,7 +17,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
@@ -38,6 +37,7 @@ public class SocketActivity extends BaseActivity {
     TextView txt1;
     @BindView(R.id.sendLay)
     LinearLayout linearLayout;
+
     @Override
     public void onMessageEvent(BaseEvent event) {
         super.onMessageEvent(event);
@@ -53,9 +53,9 @@ public class SocketActivity extends BaseActivity {
         ButterKnife.bind(this);
         int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        linearLayout.measure(w,h);
-        Log.d("SocketActivity","linearLayout->getWidth="+linearLayout.getWidth());
-        Log.d("SocketActivity","linearLayout->="+linearLayout.getMeasuredWidth());
+        linearLayout.measure(w, h);
+        Log.d("SocketActivity", "linearLayout->getWidth=" + linearLayout.getWidth());
+        Log.d("SocketActivity", "linearLayout->=" + linearLayout.getMeasuredWidth());
     }
 
     @OnClick(R.id.send)
@@ -79,8 +79,14 @@ public class SocketActivity extends BaseActivity {
             //定义消息
             try {
                 //连接服务器 并设置连接超时为5秒
-                socket = new Socket();
-                socket.connect(new InetSocketAddress("192.168.1.170", 30000), 5000);
+                socket = new Socket("192.168.1.222", 30000);
+                if (socket.isConnected()) {
+                    Log.d("Socket", "与服务器连接成功");
+                } else {
+                    Log.d("Socket", "没有连接成功");
+
+                }
+//                socket.connect(new InetSocketAddress("192.168.1.222", 8888), 5000);
                 //获取输入输出流
                 OutputStream ou = socket.getOutputStream();
                 BufferedReader bff = new BufferedReader(new InputStreamReader(
@@ -93,7 +99,7 @@ public class SocketActivity extends BaseActivity {
                 }
 
                 //向服务器发送信息
-                ou.write(("android 客户端" + geted1).getBytes("gbk"));
+                ou.write(("android 客户端" + geted1 + "\n").getBytes("gbk"));
                 ou.flush();
                 //发送消息 修改UI线程中的组件
                 BaseEvent event = new BaseEvent();
@@ -112,6 +118,7 @@ public class SocketActivity extends BaseActivity {
                 event.setSendName(0x11 + "");
                 event.setObject("服务器连接失败！请检查网络是否打开");
                 EventBus.getDefault().post(event);
+                aa.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
