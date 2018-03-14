@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.administrator.myapplication.nettyActivity.NettySocketActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -34,14 +36,14 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_socket:
-                startActivity(new Intent(MainActivity.this, SocketActivity2.class));
+                startActivity(new Intent(MainActivity.this, NettySocketActivity.class));
                 break;
             case R.id.btn_network:
                 break;
             case R.id.recycleView:
                 startActivity(new Intent(MainActivity.this, RecycleViewActivity.class));
-
                 break;
+
             default:
                 break;
         }
