@@ -12,6 +12,6 @@
 ###### Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.Alpha-chen:MyApplication:Tag'
+	          implementation 'com.github.Alpha-chen:MyApplication:V0.0.2'
 	}
 Share this release:
